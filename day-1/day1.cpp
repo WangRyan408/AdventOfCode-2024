@@ -16,15 +16,16 @@ int main() {
     size_t totalDistance = 0;
 
     
-        while (std::getline(file, line)) {
-            std::stringstream ss(line);
-            ss >> word1 >> word2;
-            std::cout << word1 << " " << word2 << std::endl;
-            left.push_back(std::stoi(word1));
-            right.push_back(std::stoi(word2));
-        }
-        file.close();
-    
+    if (!file.is_open()) {
+        std::cout << "File not found" << std::endl;
+        return 1;
+    }
+
+    while (file >> word1 >> word2) {
+        left.push_back(std::stoi(word1));
+        right.push_back(std::stoi(word2));
+    }
+    file.close();
 
     std::sort(left.begin(), left.end());
     std::sort(right.begin(), right.end());
